@@ -1,12 +1,12 @@
-name: Deploy to Test
+name: Deploy to Production
 
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
-  deploy-test:
+  deploy-prod:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,11 +15,11 @@ jobs:
       - name: Build
         run: 'echo "TODO: replace with your real build steps"'
 
-      - name: Unit tests
-        run: 'echo "TODO: replace with your real unit tests steps"'
-
-      - name: Deploy to test
-        run: 'echo "TODO: replace with your real deploy to test steps"'
+      - name: Deploy to prod
+        run: 'echo "TODO: replace with your real deploy to prod steps"'
 
       - name: Health check
         run: 'echo "TODO: replace with your real health check steps"'
+
+      - name: Traffic shift
+        run: 'echo "TODO: replace with your real traffic shift steps"'
