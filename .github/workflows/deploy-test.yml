@@ -1,0 +1,25 @@
+name: Deploy to Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: echo "TODO: replace with your real build steps"
+
+      - name: Unit tests
+        run: echo "TODO: replace with your real test steps"
+
+      - name: Deploy to test
+        run: echo "TODO: replace with your real deploy-to-test steps"
+
+      - name: Health check
+        run: echo "TODO: replace with your real test-environment health check"
