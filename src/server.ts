@@ -1,5 +1,5 @@
 import express from 'express';
-import statusRouter from './routes/status';
+import apiRouter from './api';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -7,8 +7,13 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
-// Routes - Status endpoint with no auth middleware
-app.use('/api', statusRouter);
+// API routes
+app.use('/api', apiRouter);
+
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 // Start server
 app.listen(PORT, () => {
