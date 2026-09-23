@@ -1,14 +1,18 @@
-/**
- * Server entry point
- * Starts the Express application
- */
+import express from 'express';
+import statusRouter from './routes/status';
 
-import app from './app';
-
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-const server = app.listen(PORT, () => {
+// Middleware
+app.use(express.json());
+
+// Routes - Status endpoint with no auth middleware
+app.use('/api', statusRouter);
+
+// Start server
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-export default server;
+export default app;
