@@ -1,20 +1,17 @@
-/**
- * Express application setup
- * Configures routes and middleware
- */
+import express, { Express } from 'express';
+import whoamiRouter from './api/whoami';
+import branchRouter from './api/branch';
 
-import express from 'express';
-import versionRoutes from './routes/version';
-
-const app = express();
+const app: Express = express();
 
 // Middleware
 app.use(express.json());
 
-// Routes - Version endpoint (no auth required)
-app.use('/api', versionRoutes);
+// Routes
+app.use('/api/whoami', whoamiRouter);
+app.use('/api/branch', branchRouter);
 
-// Health check
+// Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });

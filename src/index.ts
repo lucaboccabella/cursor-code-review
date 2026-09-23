@@ -1,25 +1,13 @@
-import express from 'express';
-import greetingRouter from './api/greeting';
-import rollbackRouter from './api/rollback';
+import app from './app';
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(express.json());
-
-// Routes
-app.use('/api', greetingRouter);
-app.use('/api', rollbackRouter);
-
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
-
-// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`\nAvailable endpoints:`);
+  console.log(`  GET  /api/whoami        - Get anonymous user`);
+  console.log(`  POST /api/branch/promote - Promote develop to main`);
+  console.log(`  POST /api/branch/rollback - Rollback main branch`);
+  console.log(`  GET  /api/branch/state  - Get current branch state`);
+  console.log(`  GET  /health            - Health check`);
 });
-
-export default app;
