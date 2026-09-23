@@ -1,15 +1,31 @@
-import express from 'express';
-import readyRoutes from './routes/ready';
+/**
+ * Express Server Configuration
+ * 
+ * Sets up the main Express application with API routes
+ */
 
-const app = express();
+import express, { Express } from 'express';
+import apiRouter from './api';
 
-// Mount routes
-app.use(readyRoutes);
-
+const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Middleware
+app.use(express.json());
+
+// API Routes
+app.use('/api', apiRouter);
+
+// Health check endpoint (no authentication)
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
 });
+
+// Start server
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
 export default app;
